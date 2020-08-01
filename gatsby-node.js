@@ -1,87 +1,83 @@
-
+// const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope")
 var path = require("path")
-var {createFilePath} = require("gatsby-source-filesystem")
+var { createFilePath } = require("gatsby-source-filesystem")
 
-exports.onCreateNode = ({node, getNode, actions}) =>{
-    const {createNodeField} = actions
-    if (node.internal.type === 'Mdx') {
-        const route = createFilePath({node, getNode, basePath:'posts'})
-        createNodeField({
-            node,
-            name: 'route',
-            value: route
-        })
-    }
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === "Mdx") {
+    const route = createFilePath({ node, getNode, basePath: "posts" })
+    createNodeField({
+      node,
+      name: "slug",
+      value: route,
+    })
+  }
 }
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage } = actions
   return new Promise((resolve, reject) => {
     resolve(
       graphql(
         `
           {
             allMdx {
-                edges {
-                    node {
-                        fields {
-                            route
-                        }
-                        id
-                        parent {
-                            ... on File {
-                                name
-                                sourceInstanceName
-                            }
-                        }
-                        code {
-                            scope
-                        }
+              edges {
+                node {
+                  fields {
+                    slug
+                  }
+                  id
+                  parent {
+                    ... on File {
+                      name
+                      sourceInstanceName
                     }
+                  }
                 }
+              }
             }
           }
         `
       ).then(result => {
         if (result.errors) {
-          console.log(result.errors);
-          reject(result.errors);
+          console.log(result.errors)
+          reject(result.errors)
         }
 
-        result.data.allMdx.edges.forEach(({ node }) => {
+        const posts = result.data.allMdx.edges;
+
+        posts.forEach(({ node }, index) => {
           createPage({
-            path: node.fields.route,
-            component: componentWithMDXScope(
-              path.resolve("./src/components/post-layout.js"),
-              node.code.scope
-            ),
-            context: { 
-                id: node.id, 
-                postRoute: node.fields.route
-            }
-          });
-        });
+            path: node.fields.slug,
+            component: path.resolve("./src/components/post-layout.js"),
+            context: {
+              id: node.id,
+              postRoute: node.fields.slug,
+            },
+          })
+        })
       })
-    );
-  });
-};
+    )
+  })
+}
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({
     resolve: {
-      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+      modules: [path.resolve(__dirname, "src"), "node_modules"],
     },
   })
-  if(stage === "build-html"){
+  if (stage === `develop` || stage === `develop-html`) {
     actions.setWebpackConfig({
-      module:{
+      module: {
         rules: [
           {
             test: /cld-video-player/,
-            use: loaders.null()
-          }
-        ]
-      }
+            use: loaders.null(),
+          },
+        ],
+      },
     })
   }
 }
