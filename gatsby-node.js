@@ -68,7 +68,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
     },
   })
-  if (stage === `develop` || stage === `develop-html`) {
+  if (stage === "build-html" || stage === `develop-html`) {
     actions.setWebpackConfig({
       module: {
         rules: [

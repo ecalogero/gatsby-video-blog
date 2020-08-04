@@ -9,8 +9,9 @@ import './videoplayer.css'
 class VideoPlayer extends React.Component {
     componentDidMount(){
         const {publicID, title, subtitle, muted} = this.props
+        const cloudName = "chuloo";
 
-        let cl = cloudinary.Cloudinary.new({cloud_name: "dbeloved", secure: true})
+        let cl = cloudinary.Cloudinary.new({cloud_name: cloudName, secure: true})
         let VideoPlayer = cl.videoPlayer('cl-vp',{
             loop: true,
             controls: true,

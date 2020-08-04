@@ -1,6 +1,6 @@
 import Typography from "typography";
-import fairy from "typography-theme-bootstrap";
+import bootstrap from "typography-theme-bootstrap";
 
-const typography = new Typography(fairy);
+const typography = new Typography(bootstrap);
 
 export default typography;

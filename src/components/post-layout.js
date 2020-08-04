@@ -1,18 +1,18 @@
-import React from "react"
-import Layout from "../components/layout"
+import React from "react";
+import Layout from "./layout";
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-export default ({ data: {mdx} }) => {
+export default ({ data }) => {
   return (
     <Layout>
       <div>
         <header>
-          <h1 className="article-title">{mdx.frontmatter.title}</h1>
+          <h1 className="article-title">{data.mdx.frontmatter.title}</h1>
         </header>
 
         <div>
-          <MDXRenderer>{mdx.body}</MDXRenderer>
+          <MDXRenderer>{data.mdx.body}</MDXRenderer>
         </div>
       </div>
     </Layout>

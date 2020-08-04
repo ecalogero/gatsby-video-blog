@@ -1,6 +1,6 @@
 //index.js
 import React from "react"
-import { Link, StaticQuery, graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import "./index.css"
 
