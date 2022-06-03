@@ -21,7 +21,7 @@
     "cloudinary-video-player": "^1.4.2",
     "gatsby": "^2.24.15",
     "gatsby-link": "^2.4.13",
-    "gatsby-plugin-mdx": "^1.2.30",
+    "gatsby-plugin-mdx": "^2.14.1",
     "gatsby-plugin-react-helmet": "^3.0.4",
     "gatsby-plugin-typography": "^2.5.10",
     "gatsby-remark-embed-video": "^3.0.10",
