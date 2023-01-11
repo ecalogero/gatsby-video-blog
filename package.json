@@ -28,7 +28,7 @@
     "gatsby-remark-images": "^3.3.23",
     "gatsby-remark-responsive-iframe": "^2.4.12",
     "gatsby-source-filesystem": "^2.3.23",
-    "gatsby-transformer-remark": "^2.8.27",
+    "gatsby-transformer-remark": "^5.25.1",
     "images": "^3.2.2",
     "jquery": "^3.5.1",
     "lodash": "^4.17.19",
